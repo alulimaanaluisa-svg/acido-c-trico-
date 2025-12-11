@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ácido Cítrico - UTPL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .university-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1rem auto;
+            max-width: 800px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .university-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .integrantes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .integrante {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        nav button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        nav button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        nav button.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: #2a5298;
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Intro Section Styles */
+        .molecule-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .molecule-formula {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 3px;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .property-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .app-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: 52%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 52%;
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .timeline-year {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Production Section */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #fdeb71 0%, #f8d800 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #764ba2;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #764ba2;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            nav button { padding: 0.8rem 1.5rem; font-size: 1rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+                margin-right: 0;
+            }
+            .timeline-dot { left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🍋 ÁCIDO CÍTRICO 🍋</h1>
+            <p class="subtitle">C₆H₈O₇ - El compuesto químico más versátil de la industria moderna</p>
+            
+            <div class="university-info">
+                <h3>UNIVERSIDAD TÉCNICA PARTICULAR DE LOJA</h3>
+                <p><strong>Facultad de Ciencias Exactas y Naturales</strong></p>
+                <p><strong>Carrera:</strong> Ingeniería Química</p>
+                <p><strong>Asignatura:</strong> Introducción a la Ingeniería Química</p>
+                <p><strong>Docente:</strong> Ing. Diego Maza</p>
+                
+                <div class="integrantes">
+                    <div class="integrante">👤 Alulima Viñamagua Ana Luisa</div>
+                    <div class="integrante">👤 Armijos Granda Milton Alexander</div>
+                    <div class="integrante">👤 Morocho Celi Albert Benjamin</div>
+                    <div class="integrante">👤 Zhunaula Quevedo Bryan Josue</div>
+                </div>
+                <p style="margin-top: 1rem;"><strong>Fecha:</strong> 27 de Noviembre del 2025</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><button onclick="showSection('intro')" class="active">🔬 Introducción</button></li>
+            <li><button onclick="showSection('propiedades')">⚗️ Propiedades</button></li>
+            <li><button onclick="showSection('historia')">📜 Historia</button></li>
+            <li><button onclick="showSection('produccion')">🏭 Producción</button></li>
+            <li><button onclick="showSection('aplicaciones')">💼 Aplicaciones</button></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- SECCIÓN INTRODUCCIÓN -->
+        <section id="intro" class="section active">
+            <h2>¿Qué es el Ácido Cítrico?</h2>
+            
+            <div class="molecule-container">
+                <p style="font-size: 1.3rem; margin-bottom: 1rem;">Fórmula Molecular</p>
+                <div class="molecule-formula">C₆H₈O₇</div>
+                <p style="font-size: 1.1rem; margin-top: 1rem;">Ácido Orgánico Tricarboxílico</p>
+            </div>
+
+            <p>El ácido cítrico es un compuesto orgánico que se encuentra naturalmente en las frutas cítricas como la naranja y el limón. Es uno de los productos químicos más versátiles e importantes de nuestra época, presente en miles de productos que consumimos y utilizamos diariamente.</p>
+
+            <p>Este ácido débil tricarboxílico ha trascendido su origen biológico para convertirse en un componente fundamental de múltiples industrias. Su producción mundial supera los 2.5 millones de toneladas anuales, lo que refleja su relevancia económica y funcional en el mundo contemporáneo.</p>
+
+            <h3>Características Principales</h3>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>🎨 Apariencia</h4>
+                    <p>Polvo blanco y cristalino, sin olor</p>
+                </div>
+                <div class="property-card">
+                    <h4>😋 Sabor</h4>
+                    <p>Fuerte sabor ácido característico</p>
+                </div>
+                <div class="property-card">
+                    <h4>🌡️ Descomposición</h4>
+                    <p>Se descompone a 175°C en CO₂ y H₂O</p>
+                </div>
+                <div class="property-card">
+                    <h4>💧 Solubilidad</h4>
+                    <p>Alta solubilidad en agua</p>
+                </div>
+            </div>
+
+            <h3>¿Dónde lo encontramos?</h3>
+            <div class="applications-grid">
+                <div class="app-card">
+                    <div class="app-icon">🥤</div>
+                    <strong>Bebidas</strong>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🍬</div>
+                    <strong>Dulces</strong>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">💊</div>
+                    <strong>Medicamentos</strong>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🧴</div>
+                    <strong>Cosméticos</strong>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🧼</div>
+                    <strong>Limpiadores</strong>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🏗️</div>
+                    <strong>Construcción</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PROPIEDADES -->
+        <section id="propiedades" class="section">
+            <h2>Propiedades Químicas y Físicas</h2>
+
+            <div class="molecule-container">
+                <h3 style="color: white; margin-top: 0;">Estructura Molecular</h3>
+                <p>El ácido cítrico posee tres grupos carboxilo (-COOH) que le confieren sus propiedades ácidas y su capacidad de formar sales.</p>
+            </div>
+
+            <h3>Propiedades Físicas</h3>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">192.12</div>
+                    <div class="stat-label">g/mol - Masa Molecular</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">153°C</div>
+                    <div class="stat-label">Punto de Fusión</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">175°C</div>
+                    <div class="stat-label">Descomposición</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1.665</div>
+                    <div class="stat-label">g/cm³ - Densidad</div>
+                </div>
+            </div>
+
+            <h3>Propiedades Químicas Destacadas</h3>
+            <p><strong>🔹 Ácido Débil Tricarboxílico:</strong> Presenta tres grupos carboxilo que se ionizan de forma secuencial, lo que le permite actuar como regulador de pH en múltiples aplicaciones.</p>
+
+            <p><strong>🔹 Capacidad Quelante:</strong> Forma complejos con iones metálicos (Ca²⁺, Mg²⁺, Fe³⁺), lo que resulta invaluable para prevenir la oxidación y mejorar la estabilidad de productos.</p>
+
+            <p><strong>🔹 Biodegradable:</strong> Se descompone naturalmente sin acumularse en el ambiente, convirtiéndolo en una alternativa sostenible frente a otros compuestos químicos.</p>
+
+            <p><strong>🔹 GRAS (Generally Recognized as Safe):</strong> Reconocido como sustancia segura por organismos reguladores internacionales, lo que facilita su uso en productos de consumo directo.</p>
+
+            <h3>Formas Comerciales</h3>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Ácido Cítrico Anhidro</h4>
+                    <p>Sin moléculas de agua en su estructura cristalina. Ideal para aplicaciones que requieren mayor estabilidad.</p>
+                </div>
+                <div class="property-card">
+                    <h4>Ácido Cítrico Monohidratado</h4>
+                    <p>Contiene una molécula de agua por cada molécula de ácido cítrico. Más común en aplicaciones alimentarias.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN HISTORIA -->
+        <section id="historia" class="section">
+            <h2>Historia y Evolución de la Producción</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1784</div>
+                        <h3 style="color: white;">Descubrimiento Científico</h3>
+                        <p style="color: white; text-align: left;">Carl Wilhelm Scheele, químico sueco, aisló por primera vez el ácido cítrico del jugo de limón mediante cristalización. Este proceso marcó el primer ácido orgánico en ser aislado científicamente.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1860</div>
+                        <h3 style="color: white;">Extracción Industrial</h3>
+                        <p style="color: white; text-align: left;">Comienza la obtención industrial desde cítricos en Italia. Se necesitaban aproximadamente 35 toneladas de limones para obtener una tonelada de ácido cítrico, lo que hacía el proceso poco viable económicamente.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1880</div>
+                        <h3 style="color: white;">Pfizer y la Industrialización</h3>
+                        <p style="color: white; text-align: left;">Pfizer comienza a producir y comercializar ácido cítrico importando citrato de calcio de Italia, convirtiéndose en un proveedor importante para la industria alimentaria y de bebidas en EE.UU.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1893</div>
+                        <h3 style="color: white;">Descubrimiento de la Fermentación</h3>
+                        <p style="color: white; text-align: left;">C. Wehmer observa que el hongo Penicillium puede producir ácido cítrico mediante fermentación de sacarosa. En 1894 se construye la primera planta de fermentación, aunque cerró 10 años después por problemas de contaminación.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1913</div>
+                        <h3 style="color: white;">Revolución: Aspergillus niger</h3>
+                        <p style="color: white; text-align: left;">Zahorsky patenta el uso de Aspergillus niger, el hongo que revolucionaría la industria. Su capacidad de crecer en pH bajo (2.5-3.5) evita contaminaciones y aumenta significativamente el rendimiento.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1916-1917</div>
+                        <h3 style="color: white;">Optimización del Proceso</h3>
+                        <p style="color: white; text-align: left;">Thom y Currie perfeccionan las condiciones de pH, temperatura y aireación para A. niger, transformando el proceso en algo confiable y reproducible a escala industrial.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1918</div>
+                        <h3 style="color: white;">Producción Industrial Masiva</h3>
+                        <p style="color: white; text-align: left;">James Currie y Claudio Colán establecen la producción industrial con A. niger. Dos años después, Pfizer adopta este proceso, marcando el fin de la dependencia de cítricos.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1928</div>
+                        <h3 style="color: white;">Uso de Melaza</h3>
+                        <p style="color: white; text-align: left;">En Checoslovaquia se comienza a usar melaza de remolacha como sustrato económico, aunque presenta problemas por metales traza que inhiben el crecimiento del hongo.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1938</div>
+                        <h3 style="color: white;">Solución Definitiva</h3>
+                        <p style="color: white; text-align: left;">Mezzadroli patenta el uso de hexacianoferrato de potasio como agente quelante para neutralizar metales traza en la melaza, permitiendo su uso eficiente y económico.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1960s</div>
+                        <h3 style="color: white;">Fermentación Sumergida</h3>
+                        <p style="color: white; text-align: left;">Se generaliza la fermentación sumergida en tanques, reduciendo el tiempo de producción de semanas a 6-7 días. Japón desarrolla procesos alternativos con levaduras Candida usando hidrocarburos.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">ACTUALIDAD</div>
+                        <h3 style="color: white;">Producción Mundial</h3>
+                        <p style="color: white; text-align: left;">Más del 99% de la producción mundial (2.5+ millones de toneladas) se realiza mediante fermentación microbiana. China, EE.UU. y la UE son los principales productores globales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PRODUCCIÓN -->
+        <section id="produccion" class="section">
+            <h2>Proceso de Producción Actual</h2>
+
+            <p>El proceso moderno de producción de ácido cítrico es un sistema biotecnológico integrado que utiliza fermentación microbiana con Aspergillus niger, el mismo hongo que revolucionó la industria hace más de un siglo.</p>
+
+            <h3>Etapas del Proceso de Fermentación</h3>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Preparación del Medio</h4>
+                    <p>Se prepara el sustrato con melaza de caña, sales minerales y nutrientes necesarios para el crecimiento del hongo.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Esterilización</h4>
+                    <p>El medio se esteriliza para eliminar cualquier microorganismo contaminante que pueda competir con A. niger.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Inoculación</h4>
+                    <p>Se introduce la cepa de Aspergillus niger en condiciones controladas dentro del fermentador.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Fermentación</h4>
+                    <p>Durante 6-7 días, el hongo metaboliza el azúcar y produce ácido cítrico en condiciones de pH bajo (2.5-3.5).</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h4>Separación</h4>
+                    <p>Se filtra el caldo para separar la biomasa fúngica del líquido que contiene el ácido cítrico.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h4>Purificación</h4>
+                    <p>Mediante procesos químicos se eliminan impurezas, sales minerales y otros ácidos orgánicos.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <h4>Cristalización</h4>
+                    <p>El ácido cítrico se concentra y cristaliza para obtener el producto final en forma sólida.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <h4>Secado y Empaque</h4>
+                    <p>Los cristales se secan, muelen si es necesario, y se empacan para su distribución comercial.</p>
+                </div>
+            </div>
+
+            <h3>Ventajas de la Fermentación Sumergida vs. Superficie</h3>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>⏱️ Tiempo Reducido</h4>
+                    <p>6-7 días vs. varias semanas del proceso de superficie</p>
+                </div>
+                <div class="property-card">
+                    <h4>🦠 Mayor Esterilidad</h4>
+                    <p>Mejor control de contaminación en sistemas cerrados</p>
+                </div>
+                <div class="property-card">
+                    <h4>📊 Control del Proceso</h4>
+                    <p>Monitoreo preciso de parámetros críticos</p>
+                </div>
+                <div class="property-card">
+                    <h4>📈 Alta Productividad</h4>
+                    <p>Mayor rendimiento por unidad de espacio</p>
+                </div>
+            </div>
+
+            <h3>Producción Mundial</h3>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Producción por Fermentación Microbiana</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2.5M+</div>
+                    <div class="stat-label">Toneladas Anuales</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Consumo en Alimentos y Bebidas</div>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem;"><strong>Principales Productores:</strong> Estados Unidos, China y la Unión Europea concentran la mayor parte de la capacidad de producción global, abasteciendovarias industrias en todo el mundo.</p>
+        </section>
+
+        <!-- SECCIÓN APLICACIONES -->
+        <section id="aplicaciones" class="section">
+            <h2>Aplicaciones del Ácido Cítrico</h2>
+
+            <p>El ácido cítrico es uno de los compuestos químicos más versátiles, con aplicaciones que abarcan desde la industria alimentaria hasta la construcción. Su perfil de seguridad, biodegradabilidad y múltiples propiedades funcionales lo convierten en un ingrediente indispensable.</p>
+
+            <h3>🍽️ Industria Alimentaria y Bebidas</h3>
+            <p><strong>Principal consumidor:</strong> aproximadamente el 60-70% de la producción mundial.</p>
+            <ul style="line-height: 2; margin-left: 2rem; margin-bottom: 2rem;">
+                <li><strong>Acidulante:</strong> Proporciona sabor ácido característico en bebidas carbonatadas, jugos y refrescos</li>
+                <li><strong>Conservante natural:</strong> Reduce el pH creando ambiente hostil para microorganismos</li>
+                <li><strong>Antioxidante:</strong> Previene el pardeamiento enzimático en frutas y verduras procesadas</li>
+                <li><strong>Regulador de pH:</strong> Mantiene la acidez óptima en mermeladas, conservas y dulces</li>
+                <li><strong>Potenciador de sabor:</strong> Resalta sabores naturales en alimentos procesados</li>
+            </ul>
+
+            <h3>💊 Industria Farmacéutica</h3>
+            <ul style="line-height: 2; margin-left: 2rem; margin-bottom: 2rem;">
+                <li><strong>Excipiente:</strong> En tabletas efervescentes (reacción con bicarbonatos)</li>
+                <li><strong>Agente tamponador:</strong> En soluciones intravenosas y medicamentos líquidos</li>
+                <li><strong>Anticoagulante:</strong> En bolsas de sangre para transfusiones</li>
+                <li><strong>Mejorador de biodisponibilidad:</strong> Facilita la absorción de ciertos fármacos</li>
+            </ul>
+
+            <h3>🧴 Cosmética y Cuidado Personal</h3>
+            <ul style="line-height: 2; margin-left: 2rem; margin-bottom: 2rem;">
+                <li><strong>Regulador de pH:</strong> En champús, acondicionadores y cremas</li>
+                <li><strong>Agente astringente:</strong> En productos para el cuidado de la piel</li>
+                <li><strong>Exfoliante químico:</strong> En tratamientos antienvejecimiento</li>
+                <li><strong>Suavizante capilar:</strong> Cierra cutículas del cabello proporcionando brillo</li>
+            </ul>
+
+            <h3>🧼 Limpieza y Detergencia</h3>
+            <ul style="line-height: 2; margin-left: 2rem; margin-bottom: 2rem;">
+                <li><strong>Descalcificador:</strong> Disuelve depósitos de calcio y magnesio</li>
+                <li><strong>Limpiador multiusos:</strong> Alternativa segura a ácidos minerales fuertes</li>
+                <li><strong>Desinfectante natural:</strong> En productos de limpieza ecológicos</li>
+                <li><strong>Removedor de manchas:</strong> En detergentes y quitamanchas</li>
+            </ul>
+
+            <h3>🏭 Otras Aplicaciones Industriales</h3>
+            <div class="applications-grid">
+                <div class="app-card">
+                    <div class="app-icon">🧵</div>
+                    <strong>Industria Textil</strong>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Neutralizante y secuestrante en procesos de teñido</p>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">📄</div>
+                    <strong>Industria del Papel</strong>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Blanqueo y tratamiento de aguas</p>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🏗️</div>
+                    <strong>Construcción</strong>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Retardante de fraguado en cemento</p>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🔬</div>
+                    <strong>Laboratorios</strong>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Reactivo químico y buffer</p>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">⚡</div>
+                    <strong>Energía</strong>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Investigación en baterías orgánicas</p>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🌱</div>
+                    <strong>Agricultura</strong>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Bioestimulante y solubilizador de nutrientes</p>
+                </div>
+            </div>
+
+            <h3>Ventajas del Ácido Cítrico</h3>
+            <div class="properties-grid" style="margin-top: 2rem;">
+                <div class="property-card">
+                    <h4>✅ Seguridad</h4>
+                    <p>Reconocido como GRAS, no tóxico para humanos</p>
+                </div>
+                <div class="property-card">
+                    <h4>🌍 Sostenibilidad</h4>
+                    <p>Completamente biodegradable y de origen renovable</p>
+                </div>
+                <div class="property-card">
+                    <h4>💰 Económico</h4>
+                    <p>Producción eficiente y costos competitivos</p>
+                </div>
+                <div class="property-card">
+                    <h4>🔄 Versatilidad</h4>
+                    <p>Múltiples funciones en una sola molécula</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Universidad Técnica Particular de Loja</strong></p>
+        <p>Facultad de Ciencias Exactas y Naturales - Ingeniería Química</p>
+        <p>© 2025 - Proyecto Académico sobre Ácido Cítrico</p>
+        <p style="margin-top: 1rem;">📧 Contacto: introduccion.ing.quimica@utpl.edu.ec</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar botones activos
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll suave hacia arriba
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
